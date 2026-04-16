@@ -47,7 +47,6 @@
             pointer-events: none;
         }
 
-        /* Main Auth Card yurr */
         .auth-card {
             background: white;
             border-radius: 24px;
@@ -66,7 +65,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Header */
         .auth-header {
             background: linear-gradient(135deg, #A07855 0%, #7A5C3E 100%);
             color: white;
@@ -114,13 +112,11 @@
             margin-bottom: 28px;
         }
 
-        /* Form Groups */
         .form-group {
             margin-bottom: 24px;
             position: relative;
         }
 
-        /* Input Fields */
         .auth-input {
             width: 100%;
             border: 2px solid #E0D3C2;
@@ -142,7 +138,6 @@
             border-color: #C4A07A;
         }
 
-        /* Password Toggle */
         .toggle-password {
             position: absolute;
             right: 14px;
@@ -158,7 +153,6 @@
             opacity: 1;
         }
 
-        /* Options Row */
         .auth-options {
             display: flex;
             justify-content: space-between;
@@ -167,24 +161,6 @@
             font-size: 13px;
         }
 
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            color: #666;
-        }
-
-        .remember-me:hover {
-            color: #A07855;
-        }
-
-        .remember-me input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-            accent-color: #A07855;
-        }
 
         .forgot-link {
             color: #E8A0A0;
@@ -236,17 +212,7 @@
             font-family: 'Nunito', sans-serif;
         }
 
-        .btn-signup:hover {
-            background: #E8A0A0;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(232, 160, 160, 0.3);
-        }
 
-        .btn-signup:active {
-            transform: translateY(0);
-        }
-
-        /* Divider */
         .auth-divider {
             text-align: center;
             color: #999;
@@ -273,7 +239,6 @@
             right: 0;
         }
 
-        /* Alert Messages */
         .alert {
             padding: 12px 16px;
             border-radius: 12px;
@@ -306,7 +271,6 @@
             color: #0d47a1;
         }
 
-        /* Loading State */
         .btn-login.loading {
             position: relative;
             color: transparent;
@@ -327,7 +291,6 @@
             animation: spin 0.6s linear infinite;
         }
 
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -399,16 +362,14 @@
 <body>
     <div class="auth-card">
         <div class="auth-header">
-            🧿 AniKahon
+            AniKahon
         </div>
         <div class="auth-form">
             <h2>Welcome Back!</h2>
             <p>Login to continue shopping</p>
             
-            <!-- Alert Messages Container -->
             <div id="alert-messages"></div>
             
-            <!-- Login Form -->
             <form id="login-form">
                 <div class="form-group">
                     <input type="text" name="username" id="username" class="auth-input" placeholder="Username or Email" required autofocus>
@@ -419,24 +380,15 @@
                     <span class="toggle-password" onclick="togglePassword()">👁️</span>
                 </div>
                 
-                <div class="auth-options">
-                    <label class="remember-me">
-                        <input type="checkbox" name="remember" id="remember"> Remember Me
-                    </label>
-                    <a href="#" class="forgot-link" onclick="alert('Password reset feature coming soon!')">Forgot Password?</a>
-                </div>
-                
                 <button type="submit" class="btn-login" id="login-btn">Login</button>
                 
                 <div class="auth-divider">or</div>
                 
-                <button type="button" class="btn-signup" onclick="window.location.href='/register/'">Create New Account</button>
             </form>
         </div>
     </div>
 
     <script>
-        // Toggle password visibility
         function togglePassword() {
             const passwordInput = document.getElementById('password');
             const toggleIcon = document.querySelector('.toggle-password');
@@ -450,7 +402,6 @@
             }
         }
 
-        // Show message function
         function showMessage(message, type = 'error') {
             const alertContainer = document.getElementById('alert-messages');
             const alertDiv = document.createElement('div');
@@ -458,19 +409,15 @@
             alertDiv.innerHTML = message;
             alertContainer.appendChild(alertDiv);
             
-            // Auto remove after 5 seconds because you snooze u lose
             setTimeout(() => {
                 alertDiv.remove();
             }, 5000);
         }
 
-        // Clear all messages
         function clearMessages() {
             const alertContainer = document.getElementById('alert-messages');
             alertContainer.innerHTML = '';
         }
-
-        // Set loading state
         function setLoading(isLoading) {
             const loginBtn = document.getElementById('login-btn');
             if (isLoading) {
@@ -482,25 +429,20 @@
             }
         }
 
-        // Handle form submission
+
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Clear previous messages
             clearMessages();
             
-            // Get form values
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
-            const remember = document.getElementById('remember').checked;
-            
-            // Basic validation
+             
             if (!username || !password) {
                 showMessage('Please enter both username and password');
                 return;
             }
-            
-            // Show loading state
+    
             setLoading(true);
             
     
