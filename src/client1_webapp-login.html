@@ -1,477 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - AniKahon</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@300;400;500;600;700&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AniKahon Login</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+ {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-        body {
-            font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #F5EFE6 0%, #E8DCC8 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* The back design */
-        body::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 80%;
-            background: radial-gradient(circle, rgba(160,120,85,0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        body::after {
-            content: '🧿';
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            font-size: 120px;
-            opacity: 0.05;
-            pointer-events: none;
-        }
-
-        .auth-card {
-            background: white;
-            border-radius: 24px;
-            width: 480px;
-            max-width: 90%;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(160, 120, 85, 0.1);
-            animation: fadeInUp 0.6s ease-out;
-            position: relative;
-            z-index: 1;
-        }
-
-        .auth-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .auth-header {
-            background: linear-gradient(135deg, #A07855 0%, #7A5C3E 100%);
-            color: white;
-            padding: 28px 24px;
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .auth-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .auth-card:hover .auth-header::before {
-            left: 100%;
-        }
-
-        /* Form Container */
-        .auth-form {
-            padding: 40px 32px;
-        }
-
-        .auth-form h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 26px;
-            font-weight: 700;
-            color: #2C2C2C;
-            margin-bottom: 8px;
-        }
-
-        .auth-form p {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 28px;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-            position: relative;
-        }
-
-        .auth-input {
-            width: 100%;
-            border: 2px solid #E0D3C2;
-            border-radius: 12px;
-            padding: 14px 16px;
-            font-size: 14px;
-            font-family: 'Nunito', sans-serif;
-            outline: none;
-            background: white;
-            transition: all 0.3s ease;
-        }
-
-        .auth-input:focus {
-            border-color: #A07855;
-            box-shadow: 0 0 0 3px rgba(160, 120, 85, 0.1);
-        }
-
-        .auth-input:hover:not(:focus) {
-            border-color: #C4A07A;
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            font-size: 18px;
-            opacity: 0.6;
-            transition: opacity 0.2s;
-        }
-
-        .toggle-password:hover {
-            opacity: 1;
-        }
-
-        .auth-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 28px;
-            font-size: 13px;
-        }
+body {
+    display: flex;
+    height: 100vh;
+}
 
 
-        .forgot-link {
-            color: #E8A0A0;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .forgot-link:hover {
-            color: #d08080;
-            text-decoration: underline;
-        }
-
-        /* Buttons */
-        .btn-login {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            background: linear-gradient(135deg, #9BC08A 0%, #6A9A5A 100%);
-            color: white;
-            transition: all 0.3s ease;
-            margin-bottom: 16px;
-            font-family: 'Nunito', sans-serif;
-        }
-
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(107, 154, 90, 0.3);
-        }
-
-        .btn-login:active {
-            transform: translateY(0);
-        }
-
-        .btn-signup {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            background: #F2C4C4;
-            color: #7A5C3E;
-            transition: all 0.3s ease;
-            font-family: 'Nunito', sans-serif;
-        }
+.left {
+    width: 55%;
+    background: url('jewelry.webp') no-repeat center; 
+    background-size: cover;
+}
 
 
-        .auth-divider {
-            text-align: center;
-            color: #999;
-            font-size: 12px;
-            margin: 20px 0;
-            position: relative;
-        }
+.right {
+    width: 45%;
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+}
 
-        .auth-divider::before,
-        .auth-divider::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: calc(50% - 30px);
-            height: 1px;
-            background: #E0D3C2;
-        }
+.header {
+    background: #A07855;
+    color: white;
+    padding: 20px;
+    font-size: 22px;
+    font-weight: bold;
 
-        .auth-divider::before {
-            left: 0;
-        }
+}
 
-        .auth-divider::after {
-            right: 0;
-        }
+.form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        .alert {
-            padding: 12px 16px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            font-size: 13px;
-            animation: slideIn 0.3s ease-out;
-        }
+.form-box {
+    width: 300px;
+}
 
-        .alert-error, .alert-danger {
-            background: #fee;
-            border-left: 4px solid #ff4444;
-            color: #cc0000;
-        }
+.form-box h2 {
+    margin-bottom: 5px;
+}
 
-        .alert-success {
-            background: #e8f5e9;
-            border-left: 4px solid #4caf50;
-            color: #2e7d32;
-        }
+.form-box p {
+    color: gray;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
 
-        .alert-warning {
-            background: #fff3e0;
-            border-left: 4px solid #ff9800;
-            color: #e65100;
-        }
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+}
 
-        .alert-info {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            color: #0d47a1;
-        }
+input:focus {
+    outline: none;
+    border-bottom: 1px solid #000;
+}
 
-        .btn-login.loading {
-            position: relative;
-            color: transparent;
-        }
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
 
-        .btn-login.loading::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            top: 50%;
-            left: 50%;
-            margin-left: -10px;
-            margin-top: -10px;
-            border: 2px solid white;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-        }
+.login-btn {
+    background:#e8c6c6;
+}
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-            .auth-card {
-                width: 95%;
-            }
-            
-            .auth-header {
-                font-size: 22px;
-                padding: 20px;
-            }
-            
-            .auth-form {
-                padding: 28px 20px;
-            }
-            
-            .auth-form h2 {
-                font-size: 22px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .auth-options {
-                flex-direction: column;
-                gap: 12px;
-                align-items: flex-start;
-            }
-            
-            .auth-form {
-                padding: 24px 16px;
-            }
-            
-            .auth-input {
-                padding: 12px 14px;
-            }
-            
-            .btn-login, .btn-signup {
-                padding: 12px;
-                font-size: 14px;
-            }
-        }
-    </style>
+.alert {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+</style>
 </head>
+
 <body>
-    <div class="auth-card">
-        <div class="auth-header">
-            AniKahon
-        </div>
-        <div class="auth-form">
-            <h2>Welcome Back!</h2>
-            <p>Login to continue shopping</p>
-            
-            <div id="alert-messages"></div>
-            
+
+<div class="left"></div>
+
+<div class="right">
+
+    <div class="header">👜 AniKahon</div>
+
+    <div class="form-container">
+        <div class="form-box">
+
+            <h2>Login to AniKahon</h2>
+            <p>Enter your details below</p>
+
+            <div id="alert"></div>
+
             <form id="login-form">
-                <div class="form-group">
-                    <input type="text" name="username" id="username" class="auth-input" placeholder="Username or Email" required autofocus>
-                </div>
-                
-                <div class="form-group">
-                    <input type="password" name="password" id="password" class="auth-input" placeholder="Password" required>
-                    <span class="toggle-password" onclick="togglePassword()">👁️</span>
-                </div>
-                
-                <button type="submit" class="btn-login" id="login-btn">Login</button>
-                
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="login-btn" id="login-btn">Login</button>
+
             </form>
+
         </div>
     </div>
 
-    <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const toggleIcon = document.querySelector('.toggle-password');
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleIcon.textContent = '👁️‍🗨️';
-            } else {
-                passwordInput.type = 'password';
-                toggleIcon.textContent = '👁️';
-            }
-        }
+</div>
 
-        function showMessage(message, type = 'error') {
-            const alertContainer = document.getElementById('alert-messages');
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert alert-${type}`;
-            alertDiv.innerHTML = message;
-            alertContainer.appendChild(alertDiv);
-            
-            setTimeout(() => {
-                alertDiv.remove();
-            }, 5000);
-        }
+<script>
+const form = document.getElementById('login-form');
+const alertBox = document.getElementById('alert');
+const loginBtn = document.getElementById('login-btn');
 
-        function clearMessages() {
-            const alertContainer = document.getElementById('alert-messages');
-            alertContainer.innerHTML = '';
-        }
-        function setLoading(isLoading) {
-            const loginBtn = document.getElementById('login-btn');
-            if (isLoading) {
-                loginBtn.classList.add('loading');
-                loginBtn.disabled = true;
-            } else {
-                loginBtn.classList.remove('loading');
-                loginBtn.disabled = false;
-            }
-        }
+function showMessage(msg, color = "red") {
+    alertBox.style.color = color;
+    alertBox.textContent = msg;
+}
 
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-        document.getElementById('login-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            clearMessages();
-            
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value;
-             
-            if (!username || !password) {
-                showMessage('Please enter both username and password');
-                return;
-            }
-    
-            setLoading(true);
-            
-    
-                try {
-                    const response = await fetch('http://localhost/service.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            username: username,
-                            password: password
-                        })
-                    });
-                    
-                    const data = await response.json();
-                    
-                    if (response.ok) {
-                        showMessage('Login successful! Redirecting...', 'success');
-                        setTimeout(() => {
-                            window.location.href = '/';
-                        }, 1500);
-                    } else {
-                        showMessage(data.message || 'Login failed. Please check your credentials.');
-                        setLoading(false);
-                    }
-                } catch (error) {
-                    showMessage('Network error. Please try again.');
-                    setLoading(false);
-                }
-        });
-    </script>
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+
+    if (!username || !password) {
+        showMessage("Enter username and password");
+        return;
+    }
+
+    loginBtn.disabled = true;
+
+try {
+    const response = await fetch('http://localhost/service.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+    });
+
+    if (!response.ok) {
+        throw new Error("Server error: " + response.status);
+    }
+
+    const data = await response.json();
+
+    if (data.status === 'success') {
+        showMessage("Login successful!", "green");
+
+    } else {
+        showMessage(data.message || "Login failed");
+    }
+
+} catch (error) {
+    console.error(error);
+    showMessage("Failed to connect to server");
+}
+
+loginBtn.disabled = false;
+});
+</script>
+
 </body>
 </html>
