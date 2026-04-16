@@ -503,13 +503,9 @@
             // Show loading state
             setLoading(true);
             
-            // Simulate API call (Replace this with actual API, go lei)
-            setTimeout(() => {
-                // This is where API is integrated
-                // Example API call structure:
-                /*
+    
                 try {
-                    const response = await fetch('API_ENDPOINT', {
+                    const response = await fetch('http://localhost/service.php', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -536,30 +532,6 @@
                     showMessage('Network error. Please try again.');
                     setLoading(false);
                 }
-                */
-                
-                // Temporary demo response - REMOVE THIS WHEN API IS ADDED NA
-                if (username === 'demo' && password === 'demo') {
-                    showMessage('Login successful! Redirecting...', 'success');
-                    setTimeout(() => {
-                        window.location.href = '/';
-                    }, 1500);
-                } else {
-                    showMessage('Invalid username or password. Try demo/demo');
-                    setLoading(false);
-                }
-            }, 1000);
-        });
-
-        // Add input field animations
-        const inputs = document.querySelectorAll('.auth-input');
-        inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'translateX(5px)';
-            });
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'translateX(0)';
-            });
         });
     </script>
 </body>
