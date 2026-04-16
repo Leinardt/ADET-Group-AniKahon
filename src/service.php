@@ -26,13 +26,13 @@ foreach ($users as $user) {
         // CHECK PASSWORD
         if ($user['password'] === $password) {
             echo json_encode([
-                "status" => "success",
-                "message" => "Login successful"
+                "status" => "SUCCESS",
+                "message" => "LOGIN SUCCESSFUL"
             ]);
         } else {
             echo json_encode([
-                "status" => "error",
-                "message" => "Invalid password"
+                "status" => "ERROR",
+                "message" => "INVALID PASSWORD"
             ]);
         }
         exit;
@@ -41,7 +41,7 @@ foreach ($users as $user) {
 
 // IF USERNAME NOT FOUND
 echo json_encode([
-    "status" => "error",
-    "message" => "Invalid username"
+    "status" => "ERROR",
+    "message" => "INVALID USERNAME"
 ]);
 ?>
