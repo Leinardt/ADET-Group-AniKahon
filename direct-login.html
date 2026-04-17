@@ -13,139 +13,176 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f5e6d3;  /* Warm light brown background */
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
         
         .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: #fffef7;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 5px 12px rgba(0,0,0,0.05);
             width: 100%;
-            max-width: 450px;
-            padding: 40px;
+            max-width: 480px;
+            padding: 48px 40px;
+            border: 1px solid #e8d9cc;
         }
         
         .logo {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 32px;
         }
         
         .logo h1 {
-            font-size: 32px;
-            color: #333;
-            letter-spacing: 2px;
+            font-size: 42px;
+            color: #5c3d2e;  /* Dark brown */
+            letter-spacing: 3px;
+            font-weight: 600;
         }
         
         .logo h1 span {
-            color: #764ba2;
+            color: #b87a4f;  /* Medium warm brown */
+            font-weight: 700;
         }
         
         .logo p {
-            color: #666;
-            margin-top: 5px;
+            color: #8b6b4f;
+            margin-top: 8px;
+            font-size: 14px;
+            letter-spacing: 1px;
         }
         
         h2 {
             text-align: center;
-            margin-bottom: 10px;
-            color: #333;
+            margin-bottom: 8px;
+            color: #5c3d2e;
+            font-size: 28px;
+            font-weight: 500;
         }
         
         .subtitle {
             text-align: center;
-            color: #666;
-            margin-bottom: 30px;
+            color: #9b7b5f;
+            margin-bottom: 32px;
             font-size: 14px;
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
         
         label {
             display: block;
             margin-bottom: 8px;
-            color: #333;
+            color: #5c3d2e;
             font-weight: 500;
+            font-size: 14px;
         }
         
         input {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e1e1e1;
-            border-radius: 10px;
-            font-size: 14px;
+            padding: 14px 16px;
+            border: 1.5px solid #e8d9cc;
+            border-radius: 12px;
+            font-size: 15px;
             transition: all 0.3s;
+            background: #fffef7;
+            font-family: inherit;
         }
         
         input:focus {
             outline: none;
-            border-color: #764ba2;
+            border-color: #b87a4f;
+            box-shadow: 0 0 0 3px rgba(184, 122, 79, 0.1);
+        }
+        
+        input::placeholder {
+            color: #cbb99f;
         }
         
         button {
             width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 14px;
+            background: #b87a4f;  /* Warm brown */
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s;
+            font-family: inherit;
+            margin-top: 8px;
         }
         
         button:hover {
+            background: #9c633f;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(184, 122, 79, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
         }
         
         .message {
-            margin-top: 20px;
-            padding: 12px;
-            border-radius: 10px;
+            margin-top: 24px;
+            padding: 12px 16px;
+            border-radius: 12px;
             text-align: center;
             display: none;
+            font-size: 14px;
         }
         
         .message.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
             display: block;
         }
         
         .message.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
             display: block;
         }
         
         .test-accounts {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e1e1e1;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #f0e4d8;
         }
         
         .test-accounts h4 {
-            margin-bottom: 10px;
-            color: #666;
-            font-size: 14px;
+            margin-bottom: 12px;
+            color: #8b6b4f;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .test-accounts p {
             font-size: 12px;
-            color: #888;
-            margin-bottom: 5px;
+            color: #a8886a;
+            margin-bottom: 6px;
         }
         
         .test-accounts strong {
-            color: #764ba2;
+            color: #b87a4f;
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 11px;
+            color: #cbb99f;
         }
     </style>
 </head>
@@ -176,10 +213,15 @@
         <div id="message" class="message"></div>
         
         <div class="test-accounts">
-            <h4>Test Accounts (for demo):</h4>
-            <p><strong>Admin:</strong> admin@anikahon.com / password</p>
-            <p><strong>User 1:</strong> john@example.com / password</p>
-            <p><strong>User 2:</strong> jane@example.com / password</p>
+            <h4>Test Accounts</h4>
+            <p><strong>Leinardt:</strong> leinardt@anikahon.com / password123</p>
+            <p><strong>Nyan:</strong> nyan@anikahon.com / password123</p>
+            <p><strong>Lance:</strong> lance@anikahon.com / password123</p>
+            <p><strong>Rhona (Admin):</strong> rhona@anikahon.com / password123</p>
+        </div>
+        
+        <div class="footer">
+            AniKahon &copy; 2026 | Albay's Finest Accessories
         </div>
     </div>
 
@@ -193,16 +235,21 @@
             const password = document.getElementById('password').value;
             const messageDiv = document.getElementById('message');
             
-            // Clear previous message
             messageDiv.className = 'message';
             messageDiv.textContent = '';
+            messageDiv.style.display = 'none';
             
-            // Validate both fields are filled
             if (!username || !password) {
                 messageDiv.textContent = 'Please enter both username and password';
                 messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
                 return;
             }
+            
+            // Show loading
+            messageDiv.textContent = 'Logging in...';
+            messageDiv.className = 'message';
+            messageDiv.style.display = 'block';
             
             try {
                 const response = await fetch(API_URL, {
@@ -219,24 +266,25 @@
                 const data = await response.json();
                 
                 if (response.ok && data.status === 'success') {
-                    messageDiv.textContent = `✅ ${data.message}. Welcome ${data.data.name}!`;
+                    const userName = data.data.full_name || data.data.name || data.data.email;
+                    messageDiv.textContent = `✅ ${data.message}. Welcome ${userName}!`;
                     messageDiv.className = 'message success';
+                    messageDiv.style.display = 'block';
                     
-                    // Optional: Store user info
                     localStorage.setItem('user', JSON.stringify(data.data));
                     
-                    // Redirect or show dashboard after 2 seconds
                     setTimeout(() => {
-                        alert(`Welcome to AniKahon, ${data.data.name}!`);
-                        // window.location.href = '/dashboard.html';
-                    }, 1000);
+                        alert(`Welcome to AniKahon, ${userName}!`);
+                    }, 500);
                 } else {
                     messageDiv.textContent = data.message || 'Login failed. Please check your credentials.';
                     messageDiv.className = 'message error';
+                    messageDiv.style.display = 'block';
                 }
             } catch (error) {
                 messageDiv.textContent = 'Connection error. Make sure XAMPP is running.';
                 messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
                 console.error('Error:', error);
             }
         });
