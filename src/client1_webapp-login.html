@@ -6,7 +6,7 @@
 <title>AniKahon Login</title>
 
 <style>
- {
+header{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -146,35 +146,38 @@ form.addEventListener('submit', async (e) => {
     }
 
     loginBtn.disabled = true;
+    loginBtn.textContent = "Logging in...";
 
-try {
-    const response = await fetch('http://localhost/service.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
-    });
+    try {
+        const response = await fetch('http://localhost/direct-login.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
 
-    if (!response.ok) {
-        throw new Error("Server error: " + response.status);
+        const data = await response.json();
+
+        if (data.status === 'SUCCESS') {
+            showMessage(`Welcome, ${data.data.name}!`, "green");
+            // Redirect based on role
+            if (data.data.role === 'admin') {
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                window.location.href = 'dashboard.html';
+            }
+        } else {
+            showMessage(data.message || "Login failed");
+        }
+
+    } catch (error) {
+        console.error(error);
+        showMessage("Failed to connect to server");
     }
 
-    const data = await response.json();
-
-    if (data.status === 'success') {
-        showMessage("Login successful!", "green");
-
-    } else {
-        showMessage(data.message || "Login failed");
-    }
-
-} catch (error) {
-    console.error(error);
-    showMessage("Failed to connect to server");
-}
-
-loginBtn.disabled = false;
+    loginBtn.disabled = false;
+    loginBtn.textContent = "Login";
 });
 </script>
 
