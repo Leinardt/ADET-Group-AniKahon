@@ -14,48 +14,67 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-require_once __DIR__ . '/../config/database.php';
+// DB Connection
+$host     = "localhost";
+$db_name  = "adet_db";
+$db_user  = "root";
+$db_pass  = "";
 
-$database = new Database();
-$db = $database->getConnection();
+try {
+    $db = new PDO(
+        "mysql:host=$host;dbname=$db_name;charset=utf8mb4",
+        $db_user,
+        $db_pass
+    );
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode([
+        "status"  => "ERROR",
+        "message" => "Database connection failed: " . $e->getMessage()
+    ]);
+    exit();
+}
 
-$input = json_decode(file_get_contents("php://input"), true);
-$username = $input['username'] ?? '';
-$password = $input['password'] ?? '';
+// Input
+$input    = json_decode(file_get_contents("php://input"), true);
+$username = trim($input['username'] ?? '');
+$password = trim($input['password'] ?? '');
 
 if (empty($username) || empty($password)) {
     http_response_code(400);
     echo json_encode([
-        "status" => "ERROR",
+        "status"  => "ERROR",
         "message" => "BOTH USERNAME AND PASSWORD ARE REQUIRED"
     ]);
     exit();
 }
 
-$query = "SELECT user_id, full_name, email, password, role FROM users 
-          WHERE email = :login OR full_name = :login";
-$stmt = $db->prepare($query);
+// Query
+$query = "SELECT user_id, full_name, username, password, role FROM users 
+          WHERE username = :login OR full_name = :login";
+$stmt  = $db->prepare($query);
 $stmt->bindParam(":login", $username);
 $stmt->execute();
 
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$user = $stmt->fetch();
 
 if ($user && $password === $user['password']) {
-    unset($user['password']);
     echo json_encode([
-        "status" => "SUCCESS",
+        "status"  => "SUCCESS",
         "message" => "LOGIN SUCCESSFUL",
-        "data" => [
-            "user_id" => $user['user_id'],
-            "name" => $user['full_name'],
-            "email" => $user['email'],
-            "role" => $user['role']
+        "data"    => [
+            "user_id"  => $user['user_id'],
+            "name"     => $user['full_name'],
+            "username" => $user['username'],
+            "role"     => $user['role']
         ]
     ]);
 } else {
     http_response_code(401);
     echo json_encode([
-        "status" => "ERROR",
+        "status"  => "ERROR",
         "message" => "INVALID USERNAME OR PASSWORD"
     ]);
 }
