@@ -1,2 +1,2 @@
-# ADET-Group-AniKahon
+# BSIT3B-ADET-Group-AniKahon
 ALCOVINDAS.DELOSREYES.OMADTO.PANCHO | ADET Main GitHub Repository 
