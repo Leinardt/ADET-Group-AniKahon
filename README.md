@@ -1,2 +1,3 @@
 # BSIT3B-ADET-Group-AniKahon
-ALCOVINDAS.DELOSREYES.OMADTO.PANCHO | ADET Main GitHub Repository 
+ADET Main GitHub Repository 
+Alcovindas, Nyan Jean Q. | Delos Reyes, Lance Christopher T. | Omadto, Leinardt R. | Pancho, Rhona Mae R. 
